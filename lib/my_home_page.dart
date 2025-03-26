@@ -9,7 +9,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _HomeState extends State<MyHomePage> with TickerProviderStateMixin {
-  late final TabController _tabs = TabController(length: 2, vsync: this);
+  late final TabController _tabs = TabController(length: 3, vsync: this);
   bool _activo = false;
   double _valorSlider = 0;
 
@@ -36,6 +36,7 @@ class _HomeState extends State<MyHomePage> with TickerProviderStateMixin {
           tabs: const [
             Tab(text: "Lista"),
             Tab(text: "Opciones"),
+            Tab(text: "Taller 2"),
           ],
         ),
       ),
@@ -50,6 +51,7 @@ class _HomeState extends State<MyHomePage> with TickerProviderStateMixin {
             children: List.generate(6, (i) => _buildGridItem(i)),
           ),
           _buildOptions(),
+          _buildTaller2Buttons(),
         ],
       ),
     );
@@ -116,6 +118,28 @@ class _HomeState extends State<MyHomePage> with TickerProviderStateMixin {
             ),
             Text("Valor actual: ${_valorSlider.round()}",
                 style: const TextStyle(fontSize: 16)),
+          ],
+        ),
+      );
+
+  Widget _buildTaller2Buttons() => Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () => Navigator.pushNamed(context, '/students'),
+              child: const Text("Lista de Estudiantes"),
+            ),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () => Navigator.pushNamed(context, '/counter'),
+              child: const Text("Contador con Timer"),
+            ),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () => Navigator.pushNamed(context, '/heavy'),
+              child: const Text("Tarea Pesada (Isolate)"),
+            ),
           ],
         ),
       );
