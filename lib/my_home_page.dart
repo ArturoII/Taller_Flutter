@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'form_view.dart';
+import 'chuck_jokes_list_view.dart'; // Importa la nueva vista
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -9,13 +10,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _HomeState extends State<MyHomePage> with TickerProviderStateMixin {
-  late final TabController _tabs = TabController(length: 3, vsync: this);
+  late TabController _tabs;
   bool _activo = false;
   double _valorSlider = 0;
 
   @override
   void initState() {
     super.initState();
+    _tabs = TabController(length: 4, vsync: this); // ✅ Corrección aquí
     print("🟢 initState() ejecutado");
   }
 
@@ -37,6 +39,7 @@ class _HomeState extends State<MyHomePage> with TickerProviderStateMixin {
             Tab(text: "Lista"),
             Tab(text: "Opciones"),
             Tab(text: "Taller 2"),
+            Tab(text: "Chuck Norris"), // Nueva pestaña
           ],
         ),
       ),
@@ -52,6 +55,7 @@ class _HomeState extends State<MyHomePage> with TickerProviderStateMixin {
           ),
           _buildOptions(),
           _buildTaller2Buttons(),
+          const ChuckJokesListView(), // Nueva vista para los chistes
         ],
       ),
     );
@@ -63,8 +67,7 @@ class _HomeState extends State<MyHomePage> with TickerProviderStateMixin {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>
-                  FormView(textoInicial: "Elemento $index"),
+              builder: (context) => FormView(textoInicial: "Elemento $index"),
             ),
           );
         },
